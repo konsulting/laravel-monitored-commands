@@ -8,6 +8,19 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 class TestCase extends OrchestraTestCase
 {
     /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->artisan('migrate');
+    }
+
+
+    /**
      * Get the package providers to register.
      *
      * @param \Illuminate\Foundation\Application $app

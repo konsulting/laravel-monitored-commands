@@ -16,11 +16,11 @@ class CreateMonitoredCommandsTable extends Migration
         Schema::create('command_records', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->json('arguments');
-            $table->json('options');
+            $table->json('arguments')->nullable();
+            $table->json('options')->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('completed_at')->nullable();
-            $table->longText('result');
+            $table->longText('result')->nullable();
             $table->editorStamps();
             $table->softDeletes();
             $table->timestamps();

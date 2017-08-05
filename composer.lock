@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d0f50c112ba2f0b8f85205129689807",
+    "content-hash": "ce1e5e3ece27a7e631d0c74fd5a2b4d4",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -114,6 +114,46 @@
                 "parser"
             ],
             "time": "2017-05-14T14:47:48+00:00"
+        },
+        {
+            "name": "konsulting/laravel-editor-stamps",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/konsulting/laravel-editor-stamps.git",
+                "reference": "31d36382b55dde960438b5a55bfa7f824bfbd690"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/konsulting/laravel-editor-stamps/zipball/31d36382b55dde960438b5a55bfa7f824bfbd690",
+                "reference": "31d36382b55dde960438b5a55bfa7f824bfbd690",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.3",
+                "php": "^5.6 | ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Konsulting\\Laravel\\EditorStamps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Keoghan Litchfield",
+                    "email": "keoghan@klever.co.uk"
+                }
+            ],
+            "description": "Simple package to add creator and editor to models, and populate them during creation or update.",
+            "time": "2016-11-20T21:53:36+00:00"
         },
         {
             "name": "laravel/framework",
