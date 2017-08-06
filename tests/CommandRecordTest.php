@@ -13,7 +13,7 @@ class CommandRecordTest extends TestCase
     /** @test */
     public function it_has_a_name()
     {
-        $record = new CommandRecord(['name' => 'my_record']);
+        $record = CommandRecord::create(['name' => 'my_record']);
 
         $this->assertEquals('my_record', $record->name);
     }
