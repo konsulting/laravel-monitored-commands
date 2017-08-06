@@ -1,0 +1,34 @@
+{
+  "name": "konsulting/laravel-monitored-commands",
+  "description": "",
+  "require-dev": {
+    "phpunit/phpunit": "^5.6",
+    "orchestra/testbench": "~3.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Keoghan Litchfield",
+      "email": "keoghan@klever.co.uk"
+    },
+    {
+      "name": "Robin D'Arcy",
+      "email": "robin@klever.co.uk"
+    }
+  ],
+  "require": {
+    "php": "^5.6 | ^7.0",
+    "laravel/framework": "^5.3",
+    "konsulting/laravel-editor-stamps": "^0.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Konsulting\\Laravel\\MonitoredCommands\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests"
+    ]
+  }
+}
