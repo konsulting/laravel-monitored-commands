@@ -12,12 +12,29 @@ class CommandRecord extends Model
 {
     use EditorStamps, SoftDeletes;
 
+    /**
+     * Allow mass assignment on all properties.
+     *
+     * @var array
+     */
     protected $guarded = [];
+
+    /**
+     * Specify the date type properties.
+     *
+     * @var array
+     */
     protected $dates = [
         'started_at',
         'completed_at',
         'deleted_at',
     ];
+
+    /**
+     * Specify casts for properties.
+     *
+     * @var array
+     */
     protected $casts = [
         'options'   => 'json',
         'arguments' => 'json',
@@ -30,7 +47,7 @@ class CommandRecord extends Model
      */
     public function isCompleted()
     {
-        return ! ! $this->completed_at;
+        return (bool) $this->completed_at;
     }
 
     /**
@@ -46,7 +63,7 @@ class CommandRecord extends Model
     /**
      * Get all command records for the specified name.
      *
-     * @param $name
+     * @param string $name
      * @return Collection
      */
     public static function getByName($name)
@@ -57,7 +74,7 @@ class CommandRecord extends Model
     /**
      * Check if the named command is in progress.
      *
-     * @param $name
+     * @param string $name
      * @return bool
      */
     public static function isInProgress($name)
@@ -68,7 +85,7 @@ class CommandRecord extends Model
     /**
      * Check if the named command has completed.
      *
-     * @param $name
+     * @param string $name
      * @return bool
      */
     public static function hasCompleted($name)
@@ -112,37 +129,42 @@ class CommandRecord extends Model
     /**
      * Start the command.
      *
-     * @return void
+     * @return $this
      */
     public function start()
     {
-        if ($this->hasStarted()) {
-            return;
+        if ( ! $this->hasStarted()) {
+            $this->update(['started_at' => Carbon::now()]);
         }
 
-        $this->update(['started_at' => Carbon::now()]);
+
+        return $this;
     }
 
     /**
      * Update the completed at time and message upon completion.
      *
      * @param string $message
-     * @return void
+     * @return $this
      */
     public function complete($message = null)
     {
         $this->update(['completed_at' => Carbon::now(), 'result' => $message ?: '']);
+
+        return $this;
     }
 
     /**
      * Soft delete the command record and update the message on failure.
      *
-     * @param null $message
-     * @return void
+     * @param string $message
+     * @return $this
      */
     public function fail($message = null)
     {
         $this->update(['deleted_at' => Carbon::now(), 'result' => $message ?: '']);
+
+        return $this;
     }
 
     /**
