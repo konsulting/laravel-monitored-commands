@@ -79,7 +79,10 @@ class CommandRecord extends Model
      */
     public static function isInProgress($name)
     {
-        return ! ! static::where('name', $name)->whereNull('completed_at')->first();
+        return ! ! static::where('name', $name)
+            ->whereNull('completed_at')
+            ->whereNotNull('started_at')
+            ->first();
     }
 
     /**
