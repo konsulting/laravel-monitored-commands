@@ -72,6 +72,32 @@ class CommandRecordTest extends TestCase
     }
 
     /** @test */
+    public function it_checks_if_a_command_has_been_requested()
+    {
+        CommandRecord::create(['name' => 'my_command']);
+        CommandRecord::create(['name' => 'started_command'])->start();
+        CommandRecord::create(['name' => 'completed_command'])->start()->complete();
+        CommandRecord::create(['name' => 'failed_command'])->start()->fail();
+
+        $this->assertTrue(CommandRecord::hasBeenRequested('my_command'));
+        $this->assertTrue(CommandRecord::hasBeenRequested('started_command'));
+        $this->assertTrue(CommandRecord::hasBeenRequested('completed_command'));
+        $this->assertTrue(CommandRecord::hasBeenRequested('failed_command'));
+    }
+
+    /** @test */
+    public function it_checks_how_many_times_a_command_has_been_requested()
+    {
+        CommandRecord::create(['name' => 'requested_once']);
+        CommandRecord::create(['name' => 'requested_twice'])->start()->fail();
+        CommandRecord::create(['name' => 'requested_twice'])->start()->complete();
+
+        $this->assertEquals(0, CommandRecord::hasBeenRequestedCount('my_command'));
+        $this->assertEquals(1, CommandRecord::hasBeenRequestedCount('requested_once'));
+        $this->assertEquals(2, CommandRecord::hasBeenRequestedCount('requested_twice'));
+    }
+
+    /** @test */
     public function a_command_is_in_progress_if_it_has_started_but_not_completed_or_failed()
     {
         CommandRecord::create(['name' => 'my_command'])->start()->complete();
@@ -113,5 +139,18 @@ class CommandRecordTest extends TestCase
         CommandRecord::create(['name' => 'my_command'])->start()->fail();
 
         $this->assertFalse(CommandRecord::hasCompleted('my_command'));
+    }
+
+    /** @test */
+    public function it_retrieves_the_number_of_times_that_a_command_has_completed()
+    {
+        CommandRecord::create(['name' => 'not_completed'])->start();
+        CommandRecord::create(['name' => 'completed_once'])->start()->complete();
+        CommandRecord::create(['name' => 'completed_twice'])->start()->complete();
+        CommandRecord::create(['name' => 'completed_twice'])->start()->complete();
+
+        $this->assertEquals(0, CommandRecord::hasCompletedCount('not_completed'));
+        $this->assertEquals(1, CommandRecord::hasCompletedCount('completed_once'));
+        $this->assertEquals(2, CommandRecord::hasCompletedCount('completed_twice'));
     }
 }

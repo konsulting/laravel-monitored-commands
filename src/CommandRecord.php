@@ -115,7 +115,7 @@ class CommandRecord extends Model
      */
     public static function hasBeenRequested($name)
     {
-        return ! ! static::where('name', $name)->first();
+        return ! ! static::where('name', $name)->withTrashed()->first();
     }
 
     /**
@@ -126,7 +126,7 @@ class CommandRecord extends Model
      */
     public static function hasBeenRequestedCount($name)
     {
-        return static::where('name', $name)->whereNotNull('completed_at')->count();
+        return static::where('name', $name)->withTrashed()->count();
     }
 
     /**
@@ -177,6 +177,8 @@ class CommandRecord extends Model
      */
     public function getCommandArguments()
     {
-        return array_merge(json_decode($this->arguments, true), ['--command-record-id' => $this->getKey()]);
+        return array_merge(
+            json_decode($this->arguments, true), ['--command-record-id' => $this->getKey()]
+        );
     }
 }

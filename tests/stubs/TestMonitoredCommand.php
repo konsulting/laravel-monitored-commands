@@ -1,6 +1,6 @@
 <?php
 
-namespace Konsulting\Laravel\MonitoredCommands\Tests;
+namespace Konsulting\Laravel\MonitoredCommands\Tests\Stubs;
 
 use Konsulting\Laravel\MonitoredCommands\MonitoredCommand;
 
