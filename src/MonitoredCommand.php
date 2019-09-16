@@ -119,7 +119,7 @@ abstract class MonitoredCommand extends Command
         } catch (\Exception $e) {
             return $this->fail(
                 'Error: ' . $e->getMessage()
-                . 'at line ' . $e->getLine()
+                . ' at line ' . $e->getLine()
                 . ' of ' . $e->getFile()
                 . " Stack Trace: " . $e->getTraceAsString()
             );
