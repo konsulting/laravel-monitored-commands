@@ -105,7 +105,7 @@ abstract class MonitoredCommand extends Command
      */
     public function handle()
     {
-        if ( ! $this->passesChecks()) {
+        if (! $this->passesChecks()) {
             return false;
         }
 
@@ -113,7 +113,7 @@ abstract class MonitoredCommand extends Command
             $this->commandRecord()->start();
             $message = $this->handleCommand();
 
-            if ( ! $this->isRecursive) {
+            if (! $this->isRecursive) {
                 return $this->complete($message);
             }
         } catch (\Exception $e) {
@@ -146,7 +146,7 @@ abstract class MonitoredCommand extends Command
         }
 
         foreach ($this->runsIf as $name) {
-            if ( ! CommandRecord::hasCompleted($name)) {
+            if (! CommandRecord::hasCompleted($name)) {
                 return $this->fail("Command {$name} has not run yet.");
             }
         }
@@ -158,7 +158,7 @@ abstract class MonitoredCommand extends Command
         }
 
         if ($this->commandRecord()->hasStarted()) {
-            return false;
+            throw new \Exception('The monitored command ' . $this->commandRecord()->id . ' has already started.');
         }
 
         return true;
@@ -172,7 +172,8 @@ abstract class MonitoredCommand extends Command
     protected function hasRunTooManyTimes()
     {
         return $this->runLimit >= 0 &&
-            max(CommandRecord::hasBeenRequestedCount($this->name), CommandRecord::hasCompletedCount($this->name)) >= $this->runLimit;
+            max(CommandRecord::hasBeenRequestedCount($this->name),
+                CommandRecord::hasCompletedCount($this->name)) >= $this->runLimit;
     }
 
     /**
