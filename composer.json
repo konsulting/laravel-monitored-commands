@@ -19,7 +19,8 @@
   "require": {
     "php": "^5.6 | ^7.0",
     "laravel/framework": "^5.3 | ^6.0",
-    "konsulting/laravel-editor-stamps": "^0.2.0"
+    "konsulting/laravel-editor-stamps": "^0.2.0",
+    "symfony/http-foundation": ">=3.4.35"
   },
   "autoload": {
     "psr-4": {
