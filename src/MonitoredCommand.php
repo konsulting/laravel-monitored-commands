@@ -182,7 +182,7 @@ abstract class MonitoredCommand extends Command
      * @param string $message
      * @return bool
      */
-    protected function complete($message = null)
+    protected function complete($message = '')
     {
         $this->output->success($message);
         $this->commandRecord()->complete($message);
@@ -196,7 +196,7 @@ abstract class MonitoredCommand extends Command
      * @param string $message
      * @return bool
      */
-    protected function fail($message = null)
+    protected function fail($message = '')
     {
         $this->output->error($message);
         $this->commandRecord()->fail($message);
