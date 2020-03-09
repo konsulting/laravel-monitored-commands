@@ -184,6 +184,7 @@ abstract class MonitoredCommand extends Command
      */
     protected function complete($message = '')
     {
+        $message = $this->stringFromMessage($message);
         $this->output->success($message);
         $this->commandRecord()->complete($message);
 
@@ -198,10 +199,26 @@ abstract class MonitoredCommand extends Command
      */
     protected function fail($message = '')
     {
+        $message = $this->stringFromMessage($message);
         $this->output->error($message);
         $this->commandRecord()->fail($message);
 
         return false;
+    }
+
+    /**
+     * Get a string representation of the command return value.
+     *
+     * @param mixed $message
+     * @return string
+     */
+    protected function stringFromMessage($message)
+    {
+        if (is_string($message)) {
+            return $message;
+        }
+
+        return var_export($message, true);
     }
 
     /**
