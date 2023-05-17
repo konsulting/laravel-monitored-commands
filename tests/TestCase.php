@@ -2,6 +2,7 @@
 
 namespace Konsulting\Laravel\MonitoredCommands\Tests;
 
+use Konsulting\Laravel\EditorStamps\ServiceProvider;
 use Konsulting\Laravel\MonitoredCommands\MonitoredCommandsServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -28,7 +29,7 @@ class TestCase extends OrchestraTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [MonitoredCommandsServiceProvider::class];
+        return [ServiceProvider::class ,MonitoredCommandsServiceProvider::class];
     }
 
     /**
