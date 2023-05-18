@@ -114,7 +114,7 @@ abstract class MonitoredCommand extends Command
             $message = $this->handleCommand();
 
             if (! $this->isRecursive) {
-                return $this->complete($message);
+                return $this->completeCommand($message);
             }
         } catch (\Exception $e) {
             return $this->fail(
@@ -182,7 +182,7 @@ abstract class MonitoredCommand extends Command
      * @param string $message
      * @return bool
      */
-    public function complete($message = '')
+    protected function completeCommand($message = '')
     {
         $message = $this->stringFromMessage($message);
         $this->output->success($message);
