@@ -182,7 +182,7 @@ abstract class MonitoredCommand extends Command
      * @param string $message
      * @return bool
      */
-    protected function complete($message = '')
+    public function complete($message = '')
     {
         $message = $this->stringFromMessage($message);
         $this->output->success($message);
