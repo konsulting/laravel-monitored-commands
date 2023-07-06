@@ -3,6 +3,7 @@
 namespace Konsulting\Laravel\MonitoredCommands;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -10,7 +11,7 @@ use Konsulting\Laravel\EditorStamps\EditorStamps;
 
 class CommandRecord extends Model
 {
-    use EditorStamps, SoftDeletes;
+    use HasFactory, EditorStamps, SoftDeletes;
 
     /**
      * Allow mass assignment on all properties.
