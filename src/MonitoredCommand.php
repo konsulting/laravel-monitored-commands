@@ -78,12 +78,16 @@ abstract class MonitoredCommand extends Command
      */
     public function commandRecord()
     {
+        logger('isset($this->record) ?', [isset($this->record)]);
         if (isset($this->record)) {
+            logger('use this record that exists', [$this->record]);
             return $this->record;
         }
 
+        logger("this->option(command-record-id)", [$this->option('command-record-id')]);
         if ($id = $this->option('command-record-id')) {
             $this->record = CommandRecord::find($id);
+            logger('use this existing record', [$this->record]);
 
             return $this->record;
         }
@@ -94,6 +98,7 @@ abstract class MonitoredCommand extends Command
             'options'   => $this->options(),
             'result'    => '',
         ]);
+        logger('None: create Command Record', [$this->record]);
 
         return $this->record;
     }
@@ -156,6 +161,8 @@ abstract class MonitoredCommand extends Command
                 return $this->fail("Command {$name} has already run.");
             }
         }
+
+        logger('$this->commandRecord()->hasStarted()', [$this->commandRecord()]);
 
         if ($this->commandRecord()->hasStarted()) {
             throw new \Exception('The monitored command ' . $this->commandRecord()->id . ' has already started.');
