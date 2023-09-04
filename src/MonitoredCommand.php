@@ -110,6 +110,9 @@ abstract class MonitoredCommand extends Command
      */
     public function handle()
     {
+        logger("THIS RECORD");
+        unset($this->record);
+
         if (! $this->passesChecks()) {
             return false;
         }
