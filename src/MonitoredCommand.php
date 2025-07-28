@@ -207,7 +207,7 @@ abstract class MonitoredCommand extends Command
      * @param string $message
      * @return bool
      */
-    protected function fail($message = '')
+    public function fail($message = '')
     {
         $message = $this->stringFromMessage($message);
         $this->output->error($message);
